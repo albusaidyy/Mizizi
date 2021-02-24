@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
+    tools:context=".profile.EditProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusable="auto"
+                    android:gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/userprofile" />
+
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Change image"
+                android:textColor="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Profile Details"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/EdNameUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/et_style"
+                    android:hint="User Name"
+                    android:inputType="textPersonName"
+                    android:padding="6dp" />
+
+
+                <EditText
+                    android:id="@+id/EdPhoneUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/et_style"
+                    android:hint="Phone Number "
+                    android:inputType="number"
+                    android:padding="6dp" />
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_above="@id/userLocation"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/userLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:text="Location"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/userLocation2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:gravity="start"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:text="is set as your Location"
+                        android:textSize="16sp"
+                        />
+
+
+                    <Button
+                        android:id="@+id/getLoc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="get"
+                        android:layout_marginStart="40dp"
+                        android:drawableRight="@drawable/ic_add_loc"
+                        android:background="@color/colorWhite"
+                        android:fontFamily="@font/roboto_regular"
+                        android:clickable="false"
+                        />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnsaveUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/bt_style"
+                android:padding="9dp"
+                android:text="Save Details"
+                android:textColor="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/TvchangePass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Change password"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
+
+

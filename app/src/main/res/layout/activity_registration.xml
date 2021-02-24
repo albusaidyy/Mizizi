@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".authentication.RegistrationActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="Create a new Account"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@android:color/background_dark" />
+
+
+
+        <EditText
+            android:id="@+id/email_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_style"
+            android:hint="Email:"
+            android:inputType="textEmailAddress"
+            android:padding="9dp" />
+
+
+        <EditText
+            android:id="@+id/password_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_style"
+            android:hint="Password:"
+            android:inputType="textPassword"
+            android:padding="9dp" />
+
+        <EditText
+            android:id="@+id/ConfirmPassword_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_style"
+            android:hint="Confirm Password:"
+            android:inputType="textPassword"
+            android:padding="9dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_above="@id/userLocation"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/userLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:text="Location"
+                android:textSize="16sp"
+                 />
+
+            <TextView
+                android:id="@+id/userLocation2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:gravity="start"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:text="is set as your Location"
+                android:textSize="16sp"
+                />
+
+
+            <Button
+                android:id="@+id/getLoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="get"
+                android:layout_marginStart="40dp"
+                android:drawableRight="@drawable/ic_add_loc"
+                android:background="@color/colorWhite"
+                android:fontFamily="@font/roboto_regular"
+                />
+
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/bt_style"
+            android:text="sign up"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:id="@+id/Tv_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="Already Have an Account? Sign In"
+            android:textColor="@color/colorPrimaryDark" />
+
+
+    </LinearLayout>
+</LinearLayout>

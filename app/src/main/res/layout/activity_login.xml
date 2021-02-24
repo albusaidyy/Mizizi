@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="10dp"
+    tools:context=".authentication.LoginActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Welcome Back"
+            
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@android:color/background_dark" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="Log In"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@android:color/background_dark" />
+
+        <EditText
+            android:id="@+id/email_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="9dp"
+            android:background="@drawable/et_style"
+            android:hint="Email:"
+            android:inputType="textEmailAddress"
+             />
+
+        <EditText
+            android:id="@+id/password_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_style"
+            android:hint="Password:"
+            android:inputType="textPassword"
+            android:padding="9dp" />
+
+        <Button
+            android:id="@+id/btn_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bt_style"
+            android:padding="9dp"
+            android:text="sign in"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:id="@+id/Tv_RestPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Forgot password?"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="1dp"
+                android:background="#7a8b8b8b" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OR"/>
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="1dp"
+                android:background="#7a8b8b8b" />
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/Tv_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Create an Account?"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:padding="9dp"
+            android:textColor="@android:color/background_light"
+            android:background="@color/colorAccent"
+            />/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProcessActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/mCameraButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bt_style"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="15dp"
+            android:text="Take a Photo"
+            android:textColor="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/mGalleryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bt_style"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="15dp"
+            android:text="Select a Photo"
+            android:textColor="@android:color/background_light" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/mPhotoImageView"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/camera" />
+
+
+        <Button
+            android:id="@+id/mDetectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_style"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:text="Diagnose"
+            android:textColor="@android:color/background_light" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+
+
+                <TextView
+                    android:id="@+id/mResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Results" />
+
+                <TextView
+                    android:id="@+id/mConfidenceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Results"
+                    android:visibility="gone" />
+
+            <Button
+                android:id="@+id/mInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bt_style"
+                android:drawableEnd="@drawable/ic_info"
+                android:padding="5dp"
+                android:layout_margin="10dp"
+                android:text=" more "
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

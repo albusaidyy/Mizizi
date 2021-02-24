@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/admin_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/admin_alerts"
+        android:title="Alerts" />
+    <item
+        android:id="@+id/admin_action_search"
+        android:title="Search"
+        android:icon="@drawable/ic_menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView"/>
+  
+
+    <item
+        android:id="@+id/admin_log_out"
+        android:title="Log Out" />
+
+</menu>

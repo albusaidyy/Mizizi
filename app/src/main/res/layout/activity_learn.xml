@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:background="@color/cardview_light_background"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".LearnActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mMore"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:text="@string/Smore"
+        android:textColor="@color/colorBlack" />
+    <Button
+        android:id="@+id/mGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tap to GO"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bt_style"
+        android:textColor="@color/colorWhite"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rem"
+        android:orientation="vertical"
+        android:visibility="gone">
+    <TextView
+        android:id="@+id/mresults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="start"
+        android:text="Learn More!"
+        android:textColor="@color/colorBlack"
+        />
+
+    <ImageView
+        android:id="@+id/mImageView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:src="@drawable/camera"
+        />
+        <TextView
+            android:id="@+id/TvRem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The solution to this disease is abcdef"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>
