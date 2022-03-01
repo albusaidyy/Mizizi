@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:padding="9dp"
+            android:padding="12dp"
             android:background="@drawable/et_style"
             android:hint="Email:"
             android:inputType="textEmailAddress"
@@ -53,7 +53,7 @@
             android:background="@drawable/et_style"
             android:hint="Password:"
             android:inputType="textPassword"
-            android:padding="9dp" />
+            android:padding="12dp" />
 
         <Button
             android:id="@+id/btn_signin"
@@ -62,7 +62,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:background="@drawable/bt_style"
-            android:padding="9dp"
             android:text="sign in"
             android:textColor="@android:color/background_light" />
 
@@ -111,10 +110,10 @@
             android:layout_gravity="center"
             android:text="Create an Account?"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:padding="9dp"
+            android:padding="12dp"
             android:textColor="@android:color/background_light"
             android:background="@color/colorAccent"
-            />/>
+            />
 
 
     </LinearLayout>

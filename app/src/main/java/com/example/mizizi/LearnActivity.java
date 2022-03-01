@@ -1,40 +1,34 @@
 package com.example.mizizi;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.mizizi.R;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LearnActivity extends AppCompatActivity {
-    private TextView result, mRemedies;
-    private LinearLayout more, mRem;
-    private Button mgo;
-    private ImageView imageView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setTitle("Learn More");
         setContentView(R.layout.activity_learn);
-        more = findViewById(R.id.mMore);
-        mRem = findViewById(R.id.rem);
-        mgo = findViewById(R.id.mGo);
-        mRemedies = findViewById(R.id.TvRem);
+        LinearLayout more = findViewById(R.id.mMore);
+        LinearLayout mRem = findViewById(R.id.rem);
+        Button mgo = findViewById(R.id.mGo);
+        TextView mRemedies = findViewById(R.id.TvRem);
 
-        result = findViewById(R.id.mresults);
-        imageView = findViewById(R.id.mImageView);
+        TextView result = findViewById(R.id.mresults);
+        ImageView imageView = findViewById(R.id.mImageView);
 
 
         Intent intent = getIntent();
@@ -215,12 +209,9 @@ public class LearnActivity extends AppCompatActivity {
         }
 
 
-        mgo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LearnActivity.this, ProcessActivity.class));
-                finish();
-            }
+        mgo.setOnClickListener(v -> {
+            startActivity(new Intent(LearnActivity.this, ProcessActivity.class));
+            finish();
         });
 
 

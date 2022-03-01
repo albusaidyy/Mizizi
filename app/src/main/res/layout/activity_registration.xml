@@ -36,7 +36,7 @@
             android:background="@drawable/et_style"
             android:hint="Email:"
             android:inputType="textEmailAddress"
-            android:padding="9dp" />
+            android:padding="12dp" />
 
 
         <EditText
@@ -47,7 +47,7 @@
             android:background="@drawable/et_style"
             android:hint="Password:"
             android:inputType="textPassword"
-            android:padding="9dp" />
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/ConfirmPassword_reg"
@@ -57,14 +57,15 @@
             android:background="@drawable/et_style"
             android:hint="Confirm Password:"
             android:inputType="textPassword"
-            android:padding="9dp" />
+            android:padding="12dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/locat"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:padding="10dp"
+            android:padding="12dp"
             android:gravity="center"
             android:layout_gravity="center"
             android:orientation="horizontal">
@@ -82,11 +83,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-                android:gravity="end"
-                android:layout_weight="1"
-                android:text="Location"
+                android:text="Tap to get Location"
                 android:textSize="16sp"
-                 />
+                android:textColor="@android:color/background_dark"
+                />
 
             <TextView
                 android:id="@+id/userLocation2"
@@ -95,23 +95,19 @@
                 android:fontFamily="@font/roboto_bold"
                 android:layout_gravity="center"
                 android:visibility="gone"
-                android:gravity="start"
-                android:layout_weight="1"
                 android:layout_marginStart="5dp"
                 android:text="is set as your Location"
                 android:textSize="16sp"
                 />
 
 
-            <Button
+            <ImageButton
                 android:id="@+id/getLoc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="get"
-                android:layout_marginStart="40dp"
-                android:drawableRight="@drawable/ic_add_loc"
-                android:background="@color/colorWhite"
+                android:src="@drawable/ic_add_loc"
+                android:drawable="@drawable/ic_add_loc"
+                android:background="#FAFAFA"
                 android:fontFamily="@font/roboto_regular"
                 />
 

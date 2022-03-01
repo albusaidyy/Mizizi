@@ -26,6 +26,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SplashScreen"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,17 +75,8 @@
             android:name=".authentication.ResetPasswordActivity"
             android:parentActivityName=".authentication.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" /> <!-- define file provider -->
-        <!--
-set the android:exported attribute to false;
-        the file provider does not need to be public
-        -->
-        <!--
-set the android:granpermission attribute to true,
-        to allow you to grant temporary access to files
-        -->
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.mizizi.fileprovider"
@@ -95,7 +87,9 @@ set the android:granpermission attribute to true,
                 android:resource="@xml/paths" />
         </provider>
 
-        <service android:name=".getitnglocation.AppLocationService" />
+        <service
+            android:name=".getitnglocation.AppLocationService"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

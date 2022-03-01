@@ -15,6 +15,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +63,8 @@ public class RegistrationActivity extends AppCompatActivity implements LocationR
 
     private TextView tvLocation, tvLocation2;
     private ProgressBar progressBar;
-    private Button btn_loc;
+    private LinearLayout loc;
+    private ImageButton btn_loc;
     private final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private final int LOCATION_ACTIVITY_REQUEST_CODE = 1000;
     private LocationHandler locationHandler;
@@ -104,10 +107,11 @@ public class RegistrationActivity extends AppCompatActivity implements LocationR
         tvLocation=findViewById(R.id.userLocation);
         tvLocation2=findViewById(R.id.userLocation2);
         progressBar=findViewById(R.id.progressBar);
+        loc=findViewById(R.id.locat);
         btn_loc=findViewById(R.id.getLoc);
 
 
-        btn_loc.setOnClickListener(new View.OnClickListener() {
+        loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showProgressBar();
@@ -188,6 +192,7 @@ public class RegistrationActivity extends AppCompatActivity implements LocationR
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             showProgressBar();
             locationHandler.getUserLocation();

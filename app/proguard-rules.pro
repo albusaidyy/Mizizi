@@ -20,5 +20,5 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#-keep class androidx.appcompat.widget.** { *; }
+    -keep class androidx.appcompat.widget.** { *; }
 

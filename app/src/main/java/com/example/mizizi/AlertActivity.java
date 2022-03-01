@@ -1,5 +1,16 @@
 package com.example.mizizi;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -7,18 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.mizizi.adapters.AdapterAlert;
 import com.example.mizizi.authentication.LoginActivity;
@@ -82,13 +81,14 @@ public class AlertActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setTitle("Alerts");
         setContentView(R.layout.activity_alert);
 
         //init of firebase
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
-        firebaseDatabase = firebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         pb=findViewById(R.id.loading_alerts_pb);
 
         //recyclerview and its properties
@@ -157,6 +157,7 @@ public class AlertActivity extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     ModelAlert modelAlert = ds.getValue(ModelAlert.class);
 
+                    assert modelAlert != null;
                     if (modelAlert.getaTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
                             modelAlert.getaDescr().toLowerCase().contains(searchQuery.toLowerCase()))
                         alertList.add(modelAlert);
@@ -217,6 +218,7 @@ public class AlertActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -247,24 +249,14 @@ public class AlertActivity extends AppCompatActivity {
         alertDialog.setMessage("Are you sure you want to Log out?");
         alertDialog.setCancelable(false);
         // Setting Positive "Yes" Button
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                firebaseAuth.signOut();
-                startActivity(new Intent(AlertActivity.this, MainActivity.class));
-                Toast.makeText(AlertActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-
+        alertDialog.setPositiveButton("YES", (dialog, which) -> {
+            firebaseAuth.signOut();
+            startActivity(new Intent(AlertActivity.this, MainActivity.class));
+            Toast.makeText(AlertActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
+            finish();
         });
         // Setting Negative "NO" Button
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-
-        });
+        alertDialog.setNegativeButton("NO", (dialog, which) -> dialog.cancel());
 
         // Showing Alert Message
         alertDialog.show();

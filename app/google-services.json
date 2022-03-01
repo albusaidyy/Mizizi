@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "965374740716",
-    "firebase_url": "https://mizizi-8446a.firebaseio.com",
-    "project_id": "mizizi-8446a",
-    "storage_bucket": "mizizi-8446a.appspot.com"
+    "project_number": "151591699232",
+    "firebase_url": "https://mizizi-7f8cc-default-rtdb.firebaseio.com",
+    "project_id": "mizizi-7f8cc",
+    "storage_bucket": "mizizi-7f8cc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:965374740716:android:7ff4740d725926b25ebdc9",
+        "mobilesdk_app_id": "1:151591699232:android:17d9c666d4a4e2e74ccd45",
         "android_client_info": {
           "package_name": "com.example.mizizi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "965374740716-sm12bvoup2tuvbg55vr4jv0di9iv1ecc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.mizizi",
-            "certificate_hash": "c05d7681d3e647e10669f2610aafca7012112496"
-          }
-        },
-        {
-          "client_id": "965374740716-qibtqir6252surv143mg45t2sr0uqc99.apps.googleusercontent.com",
+          "client_id": "151591699232-vt3rt3vrdhko65ea2ir6li3f88l89fit.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyABtMBR_wZ2N5LKKZx0ehMZD9OyC0dD4y0"
+          "current_key": "AIzaSyBQnH_pTqUF6AoswxREAhyglVIReJsl3iI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "965374740716-qibtqir6252surv143mg45t2sr0uqc99.apps.googleusercontent.com",
+              "client_id": "151591699232-vt3rt3vrdhko65ea2ir6li3f88l89fit.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

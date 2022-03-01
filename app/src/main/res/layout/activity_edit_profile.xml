@@ -76,7 +76,7 @@
                     android:background="@drawable/et_style"
                     android:hint="User Name"
                     android:inputType="textPersonName"
-                    android:padding="6dp" />
+                    android:padding="12dp" />
 
 
                 <EditText
@@ -87,7 +87,7 @@
                     android:background="@drawable/et_style"
                     android:hint="Phone Number "
                     android:inputType="number"
-                    android:padding="6dp" />
+                    android:padding="12dp" />
 
 
 

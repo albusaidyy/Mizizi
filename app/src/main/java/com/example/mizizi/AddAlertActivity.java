@@ -6,6 +6,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,8 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mizizi.authentication.LoginActivity;
-import com.firebase.geofire.GeoFire;
-import com.firebase.geofire.GeoLocation;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -40,8 +41,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -102,6 +101,7 @@ public class AddAlertActivity extends AppCompatActivity {
     ProgressDialog pd;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +109,7 @@ public class AddAlertActivity extends AppCompatActivity {
 
 
         actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setTitle("Add New Alert");
         //enable back button in action bar
         actionBar.setDisplayShowHomeEnabled(true);
@@ -173,10 +174,11 @@ public class AddAlertActivity extends AppCompatActivity {
         imageIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CropImage.activity()
-                        .setAspectRatio(1, 1)
-                        .setCropShape(CropImageView.CropShape.RECTANGLE)
-                        .start(AddAlertActivity.this);
+                ImagePicker.with(AddAlertActivity.this)
+                        .crop()	    			//Crop image(Optional), Check Customization for more option
+                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .start();
 
             }
         });
@@ -195,7 +197,6 @@ public class AddAlertActivity extends AppCompatActivity {
                 }
                 if (TextUtils.isEmpty(description)) {
                     Toast.makeText(AddAlertActivity.this, "Enter description...", Toast.LENGTH_SHORT).show();
-                    return;
                 }
 
                 else if (isUpdateKey.equals("editAlert")) {
@@ -424,13 +425,10 @@ public class AddAlertActivity extends AppCompatActivity {
                         }
 
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            //failed uploading image
-                            Toast.makeText(AddAlertActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    .addOnFailureListener(e -> {
+                        //failed uploading image
+                        Toast.makeText(AddAlertActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                        }
                     });
         }
         }
@@ -441,20 +439,18 @@ public class AddAlertActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            mImageUri = result.getUri();
-            //set Image Uri to image view
-            imageIv.setImageURI(mImageUri);
-
+        if (resultCode == Activity.RESULT_OK) {
+            //Image Uri will not be null for RESULT_OK
+            assert data != null;
+            mImageUri =data.getData();
+                    // Use Uri object instead of File to avoid storage permissions
+                    imageIv.setImageURI(mImageUri);
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Something gone wrong", Toast.LENGTH_SHORT).show();
-            imageIv.setImageURI(null);
+            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
         }
-
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -474,11 +470,8 @@ public class AddAlertActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logOut:
-                logout();
-
-
+        if (item.getItemId() == R.id.logOut) {
+            logout();
         }
         return (super.onOptionsItemSelected(item));
     }

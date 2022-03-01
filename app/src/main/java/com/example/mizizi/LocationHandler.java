@@ -30,22 +30,23 @@ import com.google.android.gms.tasks.Task;
 
 import static android.content.Context.LOCATION_SERVICE;
 
+import java.util.Objects;
+
 public class LocationHandler {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationManager locationManager;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
-    private LocationResultListener locationResultListener;
+    private final LocationResultListener locationResultListener;
 
-    private Activity activity;
+    private final Activity activity;
 
-    private int activityRequestCode;
-    private int permissionRequestCode;
+    private final int activityRequestCode;
+    private final int permissionRequestCode;
 
     private final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private final int GRANTED = PackageManager.PERMISSION_GRANTED;
 
     public LocationHandler(Activity activity, LocationResultListener locationResultListener,
                            int activityRequestCode, int permissionRequestCode) {
@@ -70,7 +71,7 @@ public class LocationHandler {
     private void initLocationCallBack() {
         locationCallback = new LocationCallback() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
+            public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
                 locationResultListener.getLocation(locationResult.getLastLocation());
                 fusedLocationProviderClient.removeLocationUpdates(locationCallback);
@@ -84,6 +85,7 @@ public class LocationHandler {
     }
 
     private boolean isPermissionGranted(Activity activity) {
+        int GRANTED = PackageManager.PERMISSION_GRANTED;
         return ContextCompat.checkSelfPermission(activity, FINE_LOCATION) == GRANTED &&
                 ContextCompat.checkSelfPermission(activity, COARSE_LOCATION) == GRANTED;
     }
@@ -99,25 +101,15 @@ public class LocationHandler {
         LocationServices
                 .getSettingsClient(activity)
                 .checkLocationSettings(builder.build())
-                .addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
-                    @Override
-                    public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                        LocationHandler.this.getLastKnownLocation();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        int status = ((ApiException) e).getStatusCode();
-                        switch (status) {
-                            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                                try {
-                                    ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                                    resolvableApiException.startResolutionForResult(activity, requestCode);
-                                } catch (IntentSender.SendIntentException exception) {
-                                    exception.printStackTrace();
-                                }
-                                break;
+                .addOnSuccessListener(locationSettingsResponse -> LocationHandler.this.getLastKnownLocation())
+                .addOnFailureListener(e -> {
+                    int status = ((ApiException) e).getStatusCode();
+                    if (status == LocationSettingsStatusCodes.RESOLUTION_REQUIRED) {
+                        try {
+                            ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                            resolvableApiException.startResolutionForResult(activity, requestCode);
+                        } catch (IntentSender.SendIntentException exception) {
+                            exception.printStackTrace();
                         }
                     }
                 });
@@ -140,15 +132,12 @@ public class LocationHandler {
 
     @SuppressWarnings("MissingPermission")
     private void getLastKnownLocation() {
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                Location location = task.getResult();
-                if (location == null) {
-                    fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
-                } else {
-                    locationResultListener.getLocation(location);
-                }
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(task -> {
+            Location location = task.getResult();
+            if (location == null) {
+                fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+            } else {
+                locationResultListener.getLocation(location);
             }
         });
     }
@@ -158,7 +147,7 @@ public class LocationHandler {
         int status = googleApiAvailability.isGooglePlayServicesAvailable(activity);
         if (status != ConnectionResult.SUCCESS) {
             if (googleApiAvailability.isUserResolvableError(status)) {
-                googleApiAvailability.getErrorDialog(activity, status, 1001).show();
+                Objects.requireNonNull(googleApiAvailability.getErrorDialog(activity, status, 1001)).show();
             }
             return false;
         }

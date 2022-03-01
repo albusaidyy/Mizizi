@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/drawable-anydpi/ic_add_loc.xml" value="0.1945" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/drawable-anydpi/ic_add_white.xml" value="0.1945" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/drawable-anydpi/ic_address_loc.xml" value="0.1945" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/drawable/editextstyle.xml" value="0.1945" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/drawable/et_style.xml" value="0.1945" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/drawable/ic_add_loc.xml" value="0.1945" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_add_alert.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_admin.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_alert.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_change_password.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_edit_profile.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_learn.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_process.xml" value="0.25" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_profile.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_registration.xml" value="0.25" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/activity_reset_password.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android Studio/Mizizi/app/src/main/res/layout/row_alerts.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

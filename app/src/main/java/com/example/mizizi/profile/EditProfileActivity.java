@@ -1,22 +1,18 @@
 package com.example.mizizi.profile;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Looper;
-import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -32,20 +28,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.example.mizizi.LocationHandler;
 import com.example.mizizi.LocationResultListener;
-import com.example.mizizi.ProfileActivity;
 import com.example.mizizi.R;
-import com.example.mizizi.adapters.AdapterAlert;
 import com.example.mizizi.authentication.LoginActivity;
-import com.example.mizizi.models.ModelAlert;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,14 +51,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 public class EditProfileActivity extends AppCompatActivity implements LocationResultListener {
 
@@ -98,6 +83,8 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
     private Button btn_loc;
     private final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private final int LOCATION_ACTIVITY_REQUEST_CODE = 1000;
+    private final int IMAGE_ACTIVITY_REQUEST_CODE = 2000;
+
     private LocationHandler locationHandler;
 
 
@@ -130,6 +117,7 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -234,12 +222,7 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
         });
 
         //start image pick activity
-        tv_change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getImage();
-            }
-        });
+        tv_change.setOnClickListener(v -> getImage());
 
         //start image pick activity
         profileEd.setOnClickListener(new View.OnClickListener() {
@@ -249,12 +232,9 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
             }
         });
 
-        btn_loc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showProgressBar();
-                locationHandler.getUserLocation();
-            }
+        btn_loc.setOnClickListener(v -> {
+            showProgressBar();
+            locationHandler.getUserLocation();
         });
 
 
@@ -262,10 +242,12 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
 
     //get image
     private void getImage() {
-        CropImage.activity()
-                .setAspectRatio(1, 1)
-                .setCropShape(CropImageView.CropShape.OVAL)
-                .start(EditProfileActivity.this);
+        ImagePicker.with(this)
+                .crop()	    			//Crop image(Optional), Check Customization for more option
+                .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                .start();
+
     }
 
 
@@ -330,23 +312,17 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
         result.put("address", address);
 
         databaseReference.child(user.getUid()).updateChildren(result)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //update is successful
-                        pd.dismiss();
-                        Toast.makeText(EditProfileActivity.this, "Profile details updated...", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
+                .addOnSuccessListener(aVoid -> {
+                    //update is successful
+                    pd.dismiss();
+                    Toast.makeText(EditProfileActivity.this, "Profile details updated...", Toast.LENGTH_SHORT).show();
+                    finish();
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //error in update
-                        pd.dismiss();
-                        Toast.makeText(EditProfileActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
+                .addOnFailureListener(e -> {
+                    //error in update
+                    pd.dismiss();
+                    Toast.makeText(EditProfileActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    finish();
                 });
         //update name on alerts too
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Alerts");
@@ -356,6 +332,7 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String child = ds.getKey();
+                    assert child != null;
                     dataSnapshot.getRef().child(child).child("uName").setValue(name);
 
                 }
@@ -510,6 +487,7 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                     String child = ds.getKey();
+                                    assert child != null;
                                     dataSnapshot.getRef().child(child).child("uDp").setValue(myUrl);
 
                                 }
@@ -549,14 +527,18 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
         try {
 
             switch (requestCode) {
-                case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE:
+                case ImagePicker.REQUEST_CODE:
                     if (resultCode == RESULT_OK) {
-                        CropImage.ActivityResult result = CropImage.getActivityResult(data);
-                        mImageUri = result.getUri();
-
+                        //Image Uri will not be null for RESULT_OK
+                        assert data != null;
+                        mImageUri =data.getData();
+                        profileEd.setImageURI(mImageUri);
+                        // Use Uri object instead of File to avoid storage permissions
                         uploadImage();
+                    } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                        Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Something gone wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
                     }
                     break;
 
@@ -581,6 +563,7 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int LOCATION_PERMISSION_REQUEST_CODE = 1000;
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             showProgressBar();
@@ -627,18 +610,12 @@ public class EditProfileActivity extends AppCompatActivity implements LocationRe
         new AlertDialog.Builder(this)
                 .setTitle("Error")
                 .setMessage("You must enable location in order to proceed")
-                .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        showProgressBar();
-                        locationHandler.getUserLocation();
-                    }
+                .setPositiveButton("Enable", (dialog, which) -> {
+                    showProgressBar();
+                    locationHandler.getUserLocation();
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setNegativeButton("Cancel", (dialog, which) -> {
 
-                    }
                 })
 
                 .setCancelable(false)

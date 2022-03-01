@@ -1,5 +1,7 @@
 package com.example.mizizi;
 
+import static androidx.core.view.MenuItemCompat.getActionView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -8,6 +10,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,6 +57,7 @@ public class ThereProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_there_profile);
         ActionBar actionBar= getSupportActionBar();
+        assert actionBar != null;
         actionBar.setTitle("Profile");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -174,6 +178,7 @@ public class ThereProfileActivity extends AppCompatActivity {
                 myAlertList.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     ModelAlert myAlerts = ds.getValue(ModelAlert.class);
+                    assert myAlerts != null;
                     if (myAlerts.getaTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
                             myAlerts.getaDescr().toLowerCase().contains(searchQuery.toLowerCase())){
                         myAlertList.add(myAlerts);
@@ -200,13 +205,11 @@ public class ThereProfileActivity extends AppCompatActivity {
     private void checkUserStatus() {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null) {
-            //user is signed in stay here
-
-        } else {
+        if (user == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        }
+        }  //user is signed in stay here
+
     }
 
     @Override
@@ -225,7 +228,7 @@ public class ThereProfileActivity extends AppCompatActivity {
 
         //searchview to search alerts by alert title/description
         MenuItem item = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        SearchView searchView = (SearchView) getActionView(item);
 
         //search listener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -257,17 +260,11 @@ public class ThereProfileActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logOut:
-                logout();
-                break;
-
-            default:
-                break;
-
-
+        if (item.getItemId() == R.id.logOut) {
+            logout();
         }
         return (super.onOptionsItemSelected(item));
     }
@@ -283,24 +280,14 @@ public class ThereProfileActivity extends AppCompatActivity {
         alertDialog.setMessage("Are you sure you want to Log out?");
         alertDialog.setCancelable(false);
         // Setting Positive "Yes" Button
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                firebaseAuth.signOut();
-                startActivity(new Intent(ThereProfileActivity.this, MainActivity.class));
-                Toast.makeText(ThereProfileActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-
+        alertDialog.setPositiveButton("YES", (dialog, which) -> {
+            firebaseAuth.signOut();
+            startActivity(new Intent(ThereProfileActivity.this, MainActivity.class));
+            Toast.makeText(ThereProfileActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
+            finish();
         });
         // Setting Negative "NO" Button
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-
-        });
+        alertDialog.setNegativeButton("NO", (dialog, which) -> dialog.cancel());
 
         // Showing Alert Message
         alertDialog.show();
