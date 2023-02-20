@@ -21,13 +21,13 @@ Use the [apk](https://github.com/albusaidyy/Mizizi/blob/master/app/release/app-r
 Below are sample images of the app.
 
 <kbd>
-<img src="https://github.com/albusaidyy/Mizizi/blob/master/screenshots/1.jpg" alt="alt text" width="300" >
+<img src="https://github.com/albusaidyy/Mizizi/blob/master/screenshots/1.jpg" alt="sample detection image" width="300" >
 </kbd>
 <br>
 <br>
   
 <kbd> 
-<img src="https://github.com/albusaidyy/Mizizi/blob/master/screenshots/4.jpg" alt="alt text" width="300" >
+<img src="https://github.com/albusaidyy/Mizizi/blob/master/screenshots/4.jpg" alt="sample post image" width="300" >
 </kbd>
 <br>
 <br>
